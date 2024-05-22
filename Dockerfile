@@ -1,8 +1,20 @@
-# Use an official image as a parent image
-FROM ubuntu:latest
+# Usa una imagen base de Alpine Linux
+FROM alpine:latest
+
+# Instala las dependencias necesarias: git, bash, curl, jq, unzip, y tfenv
+RUN apk update && \
+    apk add --no-cache \
+    bash \
+    git \
+    curl \
+    jq \
+    unzip
+
+RUN git clone https://github.com/tfutils/tfenv.git ~/.tfenv && \
+    ln -s ~/.tfenv/bin/* /usr/local/bin
 
 # Set the working directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Copy the script into the container
 COPY entrypoint.sh .
