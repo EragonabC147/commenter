@@ -1,9 +1,12 @@
-name: 'Terraform PR Commenter Action'
-description: 'Adds opinionated comments to a PR from Terraform plan'
-author: '@andresb39'
-branding:
-  icon: 'git-pull-request'
-  color: 'purple'
+# my-custom-action/action.yml
+name: 'My Custom Action'
+description: 'An action that runs a Dockerfile and a Bash script with an argument'
+inputs:
+  arg:
+    description: 'Argument to pass to the Bash script'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.arg }}

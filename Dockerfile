@@ -1,21 +1,14 @@
-# Usa una imagen base de Alpine Linux
-FROM alpine:latest
+# Use an official image as a parent image
+FROM ubuntu:latest
 
-# Instala las dependencias necesarias: git, bash, curl, jq, unzip, y tfenv
-RUN apk update && \
-    apk add --no-cache \
-    bash \
-    git \
-    curl \
-    jq \
-    unzip && \
-    git clone https://github.com/tfutils/tfenv.git ~/.tfenv && \
-    ln -s ~/.tfenv/bin/* /usr/local/bin && \
-    tfenv install 1.8.2 && \
-    tfenv use 1.8.2
+# Set the working directory
+WORKDIR /usr/src/app
 
-ADD entrypoint.sh /entrypoint.sh
+# Copy the script into the container
+COPY script.sh .
 
-RUN chmod +x /entrypoint.sh
+# Ensure the script is executable
+RUN chmod +x script.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+# Run the script
+ENTRYPOINT ["./script.sh"]
