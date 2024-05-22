@@ -5,10 +5,10 @@ FROM ubuntu:latest
 WORKDIR /usr/src/app
 
 # Copy the script into the container
-COPY script.sh .
+COPY entrypoint.sh .
 
 # Ensure the script is executable
-RUN chmod +x script.sh
+RUN chmod +x entrypoint.sh
 
 # Run the script
-ENTRYPOINT ["./script.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
